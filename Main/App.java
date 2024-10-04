@@ -11,7 +11,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import people.Person;
 import service.CSVManagement;
 
 public class App {
@@ -130,7 +132,48 @@ public class App {
         // dis.close();
         // fis.close();
 
+        ArrayList<Person> persons = new ArrayList<>();
+
         CSVManagement csv = new CSVManagement();
-        csv.readCSV(dirPathFileName);
+        persons = csv.readCSV(dirPathFileName);
+
+        // menu
+        // 1. Enter new Person details
+        // 2. Save to file (Prompt for new csv file name)
+        // 3. Quit and terminate program
+        Console consoleSelection = System.console();
+        Integer selection = 0;
+
+        while (selection != 3) {
+            System.out.println("Type 1 to enter new Person details");
+            System.out.println("Type 2 to save to file");
+            System.out.println("Type 3 to quit and terminate the program");
+            selection = Integer.parseInt(consoleSelection.readLine(">>> "));
+
+            switch (selection) {
+                case 1:
+                    Console con1 = System.console();
+                    String personName = con1.readLine("Enter Person name: ");
+                    String personRegion = con1.readLine("Enter Region/Area: ");
+                    String personYOB = con1.readLine("Enter Year of Birth: ");
+
+                    Person p = new Person(personName, personRegion, Integer.parseInt(personYOB));
+                    persons.add(p);
+
+                    break;
+
+                case 2:
+                    Console con2 = System.console();
+                    String newFileName = con2.readLine("Enter a csv file to save (filename only)");
+                    csv.writeCSV(newFileName, persons);
+
+                    break;
+
+                default:
+                    System.out.println("Exiting program");
+                    break;
+
+            }
+        }
     }
 }
