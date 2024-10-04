@@ -1,4 +1,4 @@
-package LectureExamples;
+package Main;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import service.CSVManagement;
 
 public class App {
 
@@ -39,8 +41,8 @@ public class App {
             file.createNewFile();
         }
 
-        Console console = System.console();
-        String keyBoardInput = console.readLine("Enter a sentence: ");
+        // Console console = System.console();
+        // String keyBoardInput = console.readLine("Enter a sentence: ");
 
         // Example 1
         // Use FileWriter
@@ -110,23 +112,25 @@ public class App {
 
         // Example 4 (Decorator pattern)
         // Use FileOutputStream and DataOutputStream to write to file
-        FileOutputStream fos = new FileOutputStream(file, false);
-        DataOutputStream dos = new DataOutputStream(fos);
-        byte[] byteContent = keyBoardInput.getBytes();
-        dos.write(byteContent);
-        dos.flush();
-        dos.close();
-        fos.close();
+        // FileOutputStream fos = new FileOutputStream(file, false);
+        // DataOutputStream dos = new DataOutputStream(fos);
+        // byte[] byteContent = keyBoardInput.getBytes();
+        // dos.write(byteContent);
+        // dos.flush();
+        // dos.close();
+        // fos.close();
 
-        // Use FileInputStream and DataInputStream to read the content
-        FileInputStream fis = new FileInputStream(file);
-        DataInputStream dis = new DataInputStream(fis);
-        int contentRead = 0;
-        while ((contentRead = dis.read()) != -1) {
-            System.out.println((char) contentRead);
-        }
-        dis.close();
-        fis.close();
+        // // Use FileInputStream and DataInputStream to read the content
+        // FileInputStream fis = new FileInputStream(file);
+        // DataInputStream dis = new DataInputStream(fis);
+        // int contentRead = 0;
+        // while ((contentRead = dis.read()) != -1) {
+        // System.out.println((char) contentRead);
+        // }
+        // dis.close();
+        // fis.close();
 
+        CSVManagement csv = new CSVManagement();
+        csv.readCSV(dirPathFileName);
     }
 }
